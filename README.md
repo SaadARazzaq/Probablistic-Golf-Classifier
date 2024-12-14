@@ -2,6 +2,8 @@
 
 Welcome to the Probabilistic Golf Classifier, a decision-support tool leveraging Bayesian inference to predict the likelihood of playing golf under specific weather conditions. This implementation demonstrates the core principles of the Naive Bayes classification algorithm, entirely handcrafted without the use of external machine learning libraries.
 
+![Leonardo_Phoenix_A_futuristic_minimalist_illustration_of_a_pro_2](https://github.com/user-attachments/assets/442e4f5a-8da4-40b6-a547-2423461c85eb)
+
 ## Overview
 
 The classifier uses historical weather data to predict whether golf should be played on a given day. By employing Bayesian reasoning, it computes conditional probabilities for different weather scenarios and outputs the decision with the highest posterior probability. This repository is an excellent example of implementing machine learning algorithms from first principles, focusing on the underlying mechanics rather than library dependencies.
