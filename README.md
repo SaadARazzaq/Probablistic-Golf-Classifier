@@ -1,65 +1,91 @@
-# ⛳ Probabilistic Golf Classifier 🌦
+# Probabilistic Golf Classifier
 
-![image](https://github.com/SaadARazzaq/Probablistic-Golf-Classifier/assets/123338307/8d7f590f-fcc5-45ba-9a0e-9d41a07c45b6)
+Welcome to the Probabilistic Golf Classifier, a decision-support tool leveraging Bayesian inference to predict the likelihood of playing golf under specific weather conditions. This implementation demonstrates the core principles of the Naive Bayes classification algorithm, entirely handcrafted without the use of external machine learning libraries.
 
-Welcome to the **Probabilistic Golf Classifier**—where we bring a dash of data science and machine learning into your daily golf game decisions! 🤖... 
+## Overview
 
-`NOTE: *Funfact: This Code is all writen without using ML libraries. All handcrafted with bacjend logic of the algorithm 😎*`
+The classifier uses historical weather data to predict whether golf should be played on a given day. By employing Bayesian reasoning, it computes conditional probabilities for different weather scenarios and outputs the decision with the highest posterior probability. This repository is an excellent example of implementing machine learning algorithms from first principles, focusing on the underlying mechanics rather than library dependencies.
 
-## 🎾 Introduction
+## Problem Statement
 
-Are you ever in a dilemma about whether to grab your golf racket and hit the courts when the weather is just as unpredictable as your golf partner's serve? ⛳🌤️ This repository has your back!
+Given the following weather conditions:
 
-Our nifty **Naive Bayes classifier** is here to help you decide whether it's a good idea to play golf on a given day based on the weather conditions. We're taking the guesswork out of your golf plans and replacing it with data-driven decision-making! 📊
+- **Outlook:** Sunny
+- **Temperature:** Hot
+- **Humidity:** High
+- **Wind:** Weak
 
-## 🌦 Problem Statement
+Determine whether to play golf based on historical data.
 
-Let's set the stage for our problem:
+The decision is guided by calculating the probabilities:
 
-**Problem 1:**
+- **P(Yes | Sunny, Hot, High, Weak):** The probability of playing golf under these conditions.
+- **P(No | Sunny, Hot, High, Weak):** The probability of skipping golf under these conditions.
 
-Imagine you wake up to a day with the following weather conditions:
-- Outlook: Sunny ☀️
-- Temperature: Hot 🔥
-- Humidity: High 💧
-- Wind: Weak 🌬️
+The classification decision is based on the Maximum a Posteriori (MAP) rule, choosing the class (Yes or No) with the highest posterior probability.
 
-Your task? Determine whether it's a good day to grab your golf gear and head out to the courts. 🎾
+## Approach
 
-## 🧠 Intuition
+The Naive Bayes classifier works by leveraging Bayes' Theorem:
 
-We're not just guessing—our classifier is armed with the power of probability and Bayesian reasoning. To make the call, we calculate two important probabilities:
+\[ P(Y | X) = \frac{P(X | Y) \cdot P(Y)}{P(X)} \]
 
-- **P(Yes | Sunny, Hot, High, Weak)**: The chance of playing golf when it's sunny, hot, humid, and with a gentle breeze.
-- **P(No | Sunny, Hot, High, Weak)**: The probability of skipping golf on such a day.
+For this problem, **Y** is the target variable ("Play Golf" or "Do Not Play Golf"), and **X** represents the features (Outlook, Temperature, Humidity, and Wind). By assuming feature independence, the probability **P(X | Y)** is decomposed into the product of individual probabilities:
 
-We break these probabilities down into the individual components:
-- **P(Sunny | Yes)**: How often it's sunny when we decide to play golf.
-- **P(Hot | Yes)**: The likelihood of a hot day for golf.
-- **P(High | Yes)**: The probability of high humidity during a golf game.
-- **P(Weak | Yes)**: The chances of weak wind on golf days.
-- **P(Yes)**: The overall probability of playing golf.
+\[ P(X | Y) = P(X_1 | Y) \cdot P(X_2 | Y) \cdot \ldots \cdot P(X_n | Y) \]
 
-We do the same for not playing golf (No). Then, we compare the results and go with the one that shouts "Play golf!" the loudest. This smart decision-making process is what we call the **Maximum a Posteriori (MAP) rule.**
+The classifier computes the posterior probabilities for each class and selects the class with the higher value:
 
-## 📂 Repository Structure
+\[ P(Y | X) = P(X | Y) \cdot P(Y) \]
 
-- `data/play_golf.csv`: Our secret sauce, a dataset with historical weather and golf play decisions.
-- `notebook.ipynb`: The magical Python script housing our custom Naive Bayes classifier.
-- `README.md`: The interactive tour guide you're reading right now.
+## Key Calculations
 
-## 🚀 Usage
+For a given class **Y**:
 
-Want to see our classifier in action? Dive into the `notebook.ipynb` file, where we showcase how to use the classifier to make predictions based on weather conditions.
+- **P(X1 | Y):** Probability of sunny weather when the class is **Y**.
+- **P(X2 | Y):** Probability of hot temperature when the class is **Y**.
+- **P(X3 | Y):** Probability of high humidity when the class is **Y**.
+- **P(X4 | Y):** Probability of weak wind when the class is **Y**.
+- **P(Y):** Prior probability of the class **Y**.
 
-## 🙌 Contributions
+The above calculations are repeated for both classes: **Yes** (play golf) and **No** (do not play golf). The final decision is made by comparing the posterior probabilities.
 
-We welcome contributions and feedback from anyone who wants to make this project even cooler. Feel free to submit a pull request with your ideas for improvement or expansion. 🌟
+## Repository Structure
 
-## 🎩 Credits
+- **data/play_golf.csv:** Dataset containing historical weather conditions and golf decisions.
+- **notebook.ipynb:** Implementation of the custom Naive Bayes classifier with detailed explanations and examples.
+- **README.md:** Documentation for the project.
 
-This project was crafted with 💖 by [Saad Abdur Razzaq](https://github.com/SaadARazzaq) and [Wasif Anwar](https://github.com/wiznemm). If you find it helpful, a little tip of the hat in the form of credit to this repository would be much appreciated.
+## Usage Instructions
 
-Ready to let data guide your golf game decisions? Let's play some golf! 🎾🌞
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/probabilistic-golf-classifier.git
+   ```
 
-*Serve responsibly.* ⛳👟🥤
+2. Navigate to the repository directory:
+   ```bash
+   cd probabilistic-golf-classifier
+   ```
+
+3. Open the Jupyter Notebook:
+   ```bash
+   jupyter notebook notebook.ipynb
+   ```
+
+4. Follow the notebook to understand the implementation and see the classifier in action.
+
+## Example Prediction
+
+Given the conditions:
+
+- **Outlook:** Sunny
+- **Temperature:** Hot
+- **Humidity:** High
+- **Wind:** Weak
+
+The classifier calculates the probabilities for both outcomes (**Yes** and **No**) and determines the most probable decision. The detailed calculation process is explained in the notebook.
+
+## Contributions
+
+Contributions are welcome to enhance the functionality or improve the implementation. If you have suggestions or additional features to propose, feel free to submit a pull request.
